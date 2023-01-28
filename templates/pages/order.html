@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'" rel="stylesheet" id="bootstrap-css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+
+</head>
+<title>Requisition Document</title>
+
+
+
+<body>
+    {% include 'parts/header.html' %}
+    {% include 'parts/sidebar.html' %}
+
+
+    <section class="jumbotron text-center">
+        <div class="container">
+                <br> <br>  <br>  
+            <h1>Annual Requisition Document </h1>
+                <br> <br> <br> 
+         </div>
+    </section>
+
+
+    <div  class="container mb-4" >
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">Product Name</th>
+                                <th scope="col" class="text-center">Term 1</th>
+                                <th scope="col" class="text-center">Term 2</th>
+                                <th scope="col" class="text-center">Term 3</th>
+                                <th scope="col" class="text-center">Total Quantity</th>
+                                <th scope="col" class="text-center">Description</th>
+                                <th scope="col" class="text-center">Accepted Brand 1</th>
+                                <th scope="col" class="text-center">Accepted Brand 2</th>
+                                <th scope="col" class="text-center">Accepted Brand 3</th>
+                                <th scope="col" class="text-center">Flow Rate</th>
+                                <th scope="col" class="text-center">Unit</th>
+                                <th scope="col" class="text-center">Single Approximate Price</th>
+                                <th scope="col" class="text-center">Total Approximate Price</th>
+                                <th scope="col" class="text-center"></th>
+                                <th scope="col" class="text-right"></th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Product Name Toto</td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                            </tr>
+                            <tr>
+                                <td>Product Name Toto</td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                            </tr>
+                            <tr>
+                                <td>Product Name Tata</td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                            </tr>
+                            <tr>
+                                <td>Product Name Titi</td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td><input class="form-control" type="text" value=""/></td>
+                                <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="col mb-2"style="padding-left:85%;">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 text-right">
+                        <br>
+                        <button class="btn btn-outline-dark w3-large" type="submit">
+                           Confirm
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+       
+
+</body>
+
+{% include 'parts/footer.html' %}
+</html>

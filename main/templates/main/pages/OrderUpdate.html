@@ -1,0 +1,142 @@
+{% extends 'main/pages/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<br><br>
+<br><br>
+<br><br>
+<style>
+    #white
+    {
+        color : #fff;
+    }
+    #Naming
+    {
+        color:#023e8a;
+    
+    }
+    #btn-b
+    {
+        
+        background-color :#023e8a;
+    
+    }
+    .addorder {
+        margin: 8px 8px;
+        padding: 10px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .number {
+        width: 70px;
+        padding: 2px 2px;
+        margin: 8px 8px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }.text {
+        width: 130px;
+        padding: 2px 2px;
+        margin: 8px 8px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }.drop {
+        padding: 2px 2px;
+        margin: 8px 8px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+  </style>
+  <form method="POST" novalidate>
+{%csrf_token%}
+  <div class="container">  
+        <h1 id="Naming">Edit Order</h1>
+      <div class="text-center">
+        {%if status%}
+       
+        <h3 id="Naming" >
+        Comment : {{comment}}
+        </h3> {%endif%}
+    </div>
+   
+      <hr>
+  
+
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Product Name</th>
+                        <th scope="col" class="text-center">Term 1</th>
+                        <th scope="col" class="text-center">Term 2</th>
+                        <th scope="col" class="text-center">Term 3</th>
+                        <th scope="col" class="text-center">Description</th>
+                        <th scope="col" class="text-center">Accepted Brand 1</th>
+                        <th scope="col" class="text-center">Accepted Brand 2</th>
+                        <th scope="col" class="text-center">Accepted Brand 3</th>
+                        <th scope="col" class="text-center">Flow Rate</th>
+                        <th scope="col" class="text-center">Unit</th>
+                        <th scope="col" class="text-center">Single Approximate Price</th>
+                        {%if status == 'Needs Alteration'%}
+                        {%endif%}
+                     </tr>
+                </thead>
+                            <tbody>
+
+
+            <tr>
+                        <td class="text-center">{{order.item}}</td>
+                        <td class="text-center">{{order.FirstSemsQuantity}}</td>
+                        <td class="text-center">{{order.SecondSemsQuantity}}</td>
+                        <td class="text-center">{{order.ThirdSemsQuantity}}</td>
+                        <td class="text-center">{{order.Description}}</td>
+                        <td class="text-center">{{order.FirstBrand}}</td>
+                        <td class="text-center">{{order.SecondBrand}}</td>
+                        <td class="text-center">{{order.ThirdBrand}}</td>
+                        <td class="text-center">{{order.FlowRate}}</td>    
+                        <td class="text-center">{{order.Unit}}</td>
+                        <td class="text-center">{{order.ApproxPrice}}</td>
+                        
+
+                        <td class="text-center">{{order.annualneed.as_hidden}}</td>
+
+                </tr>
+                <tr>
+                    <td class="text-center">{{order.item.errors}}</td>
+                    <td class="text-center">{{order.FirstSemsQuantity.errors}}</td>
+                    <td class="text-center">{{SecondSemsQuantity.errors}}</td>
+                    <td class="text-center">{{order.ThirdSemsQuantity.errors}}</td>
+                    <td class="text-center">{{order.Description.errors}}</td>
+                    <td class="text-center">{{order.FirstBrand.errors}}</td>
+                    <td class="text-center">{{order.SecondBrand.errors}}</td>
+                    <td class="text-center">{{order.ThirdBrand.errors}}</td>
+                    <td class="text-center">{{order.FlowRate.errors}}</td>
+                    <td class="text-center">{{order.Unit.errors}}</td>
+                    <td class="text-center">{{order.ApproxPrice.errors}}</td>
+        
+
+                
+                </tr> 
+</tbody>
+</table>
+                       
+</div>
+</div>
+</div>    
+<div class="container text-right">
+    <button type="submit" class="btn btn-primary btn-lg">Save</button>
+    <button id="btn-b" type="submit" href="{% url 'main:AddOrder' Annualneedid%}" class="btn btn-secondary btn-lg">Cancel</button>
+    
+</div>
+</form>
+  {%endblock%}

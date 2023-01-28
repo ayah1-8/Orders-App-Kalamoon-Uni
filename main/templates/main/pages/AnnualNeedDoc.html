@@ -1,0 +1,124 @@
+{% extends 'main/pages/base.html' %}
+
+{%block content%}
+<script>
+    // When the user clicks on div, open the popup
+    function myFunctione() {
+      var popup = document.getElementById("myPopupexcel");
+      popup.classList.toggle("show");
+    }
+</script>
+
+<style>
+    /* Popup container - can be anything you want */
+    .popup {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    
+    }
+    
+    /* The actual popup */
+    .popup .popuptext {
+      visibility: hidden;
+      width: 200px;
+      font-size: 13px;
+      background-color: rgba(65, 65, 71, 0.452);
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px 0;
+      position: absolute;
+      z-index: 1;
+      bottom: -60px;
+      left: 250%;
+      margin-left: -90px;
+      width: 300%;
+      height: 250%;
+    }
+    
+    /* Toggle this class - hide and show the popup */
+    .popup .show {
+      visibility: visible;
+      -webkit-animation: fadeIn 1s;
+      animation: fadeIn 1s;
+    }
+    
+    /* Add animation (fade in the popup) */
+    @-webkit-keyframes fadeIn {
+      from {opacity: 0;} 
+      to {opacity: 1;}
+    }
+    
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity:1 ;}
+    }
+</style>
+
+<section class="jumbotron text-center">
+    <div class="container">
+        <br> <br><br> <br>
+        <h1 id="Naming">{{annualneed}} </h1>
+        <br>
+        <a href="{%url 'main:template' annualneed.id%}"><button class="btn btn-primary" >ReUse Annual Need</button>
+        </a>
+     </div>
+</section>
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">Product Name</th>
+                            <th scope="col" class="text-center">Term 1</th>
+                            <th scope="col" class="text-center">Term 2</th>
+                            <th scope="col" class="text-center">Term 3</th>
+                            <th scope="col" class="text-center">Total Quantity</th>
+                            <th scope="col" class="text-center">Description</th>
+                            <th scope="col" class="text-center">Accepted Brand 1</th>
+                            <th scope="col" class="text-center">Accepted Brand 2</th>
+                            <th scope="col" class="text-center">Accepted Brand 3</th>
+                            <th scope="col" class="text-center">Flow Rate</th>
+                            <th scope="col" class="text-center">Unit</th>
+                            <th scope="col" class="text-center">Single Approximate Price</th>
+                            <th scope="col" class="text-center">Total Approximate Price</th>
+                            <!-- <th scope="col" class="text-center"><i class="fa fa-download" aria-hidden="true"></i>     </th>                             -->
+                            <th scope="col" class="text-right"><a href="{%url 'main:export' annualneed.id%}"><i class="fa fa-file-excel-o" aria-hidden="true"></i> </a>   </th>
+                        </tr>
+                    </thead>   <tbody>
+{%for order in orders%}
+
+ 
+        <td class="text-center">{{order.item.ItemName}}</td>
+        <td class="text-center">{{order.FirstSemsQuantity}}</td>
+        <td class="text-center">{{order.SecondSemsQuantity}}</td>
+        <td class="text-center">{{order.ThirdSemsQuantity}}</td>
+        <td class="text-center">{{order.Total_Quantity}}</td>
+        <td class="text-center">{{order.Description}}</td>
+        <td class="text-center">{{order.FirstBrand}}</td>
+        <td class="text-center">{{order.SecondBrand}}</td>
+        <td class="text-center">{{order.ThirdBrand}}</td>
+        <td class="text-center">{{order.FlowRate}}</td>    
+        <td class="text-center">{{order.Unit}}</td>
+        <td class="text-center">{{order.ApproxPrice}}</td>
+        <td class="text-center">{{order.total_Approx_Price}}</td>
+        <td class="text-center"></td>
+        
+
+      </tr>
+     {%endfor%}
+    </tbody>
+
+</div>
+</div>
+</div>
+
+
+  </table>
+{%endblock%}

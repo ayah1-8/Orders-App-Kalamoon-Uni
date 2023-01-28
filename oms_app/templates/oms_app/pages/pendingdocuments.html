@@ -1,0 +1,192 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'" rel="stylesheet" id="bootstrap-css">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+
+
+    {% include 'oms_app/parts/header.html' %}
+<!-- PendingCSS -->
+    <style>
+
+    #contain2
+    {
+        position: relative;
+        width:100%;
+        margin-left: 0px;
+        text-align: center;
+    }
+    #contain
+    {
+    padding-top:10%;
+    text-align: center;
+    }
+    #std
+    {
+    padding-top: 3%;
+    text-align: center;
+    }
+    #comment
+    {
+        width: 198px;
+    }
+    h1
+    {
+        color: rgb(2, 2, 206);
+        text-align: center;
+    }
+    #anh1
+    {
+        left: 20%;
+    }
+    #btnspan
+    {
+        float:left;
+        margin-right: 10px;
+    }
+    input
+     {
+        width: 100%;
+        color: rgb(54, 54, 54);
+        margin: 8px 0;
+        border: 3px solid #ccc;
+        border-radius: 6px;
+        padding: 13px 4px;
+        text-align: center;
+        margin-right:40px;
+        }
+        #alertmsg
+        {
+            text-align: center;
+        }
+    </style>
+
+     
+</head>
+
+<title>Pending Document</title>
+   
+<body>
+
+    <div id="contain" class="container">
+        <h1>Add Comments</h1>
+        <div id="contain2" class="container">
+        <div class="row" >
+            <div class="column" >
+                <div class="table">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">Product Name</th>
+                                <th scope="col" class="text-center">Comment</th>
+                                <th scope="col" class="text-center">Click to add</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <form method="POST" action="{% url 'addcomment' %}">
+                             {%csrf_token%} 
+                            <td id="std">
+                                <select  name="dropdown" required>
+                                    <option selected value="" disabled>Choose an Item</option>
+                                    {%for order in annualneedorders%}
+                                    <option value="{{order.id}}">{{order.item}}</option>
+                                    {%endfor%}
+                                </select>
+                            </td>
+                            <td><input type="text" id="inp" name="comment" required/></td>
+                            <td id="std"><button type="submit" class="btn btn-primary">Add Comment</button></td>
+                            </form>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    {%if messages%}
+    {%for message in messages %}
+         <div id="alertmsg" class="alert alert-danger" role="alert"><b>{{message}}</b></div>
+    {%endfor%}
+    {%endif %}
+    <h1 id="anh1">{{annualneed.RequestingParty}} Annualneed Need Document </h1>
+
+    <div id="contain2" class="container">
+        <div class="row" >
+            <div class="column" >
+                <div class="table">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">Product Name</th>
+                                <th scope="col" class="text-center">Term 1</th>
+                                <th scope="col" class="text-center">Term 2</th>
+                                <th scope="col" class="text-center">Term 3</th>
+                                <th scope="col" class="text-center">Total Quantity</th>
+                                <th scope="col" class="text-center">Description</th>
+                                <th scope="col" class="text-center">Accepted Brand 1</th>
+                                <th scope="col" class="text-center">Accepted Brand 2</th>
+                                <th scope="col" class="text-center">Accepted Brand 3</th>
+                                <th scope="col" class="text-center">Flow Rate</th>
+                                <th scope="col" class="text-center">Unit</th>
+                                <th scope="col" class="text-center">Single Approximate Price</th>
+                                <th scope="col" class="text-center">Total Approximate Price</th>
+                                <th scope="col" class="text-center">Comments</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for i in annualneedorders%}
+                                    <tr>
+                                        <td>{{ i.item }}</td>
+                                        <td><input type="text" value="{{i.FirstSemsQuantity}}" disabled/></td>
+                                        <td><input type="text" value="{{i.SecondSemsQuantity}}" disabled/></td>
+                                        <td><input type="text" value="{{i.ThirdSemsQuantity}}" disabled/></td>
+                                        <td><input type="text" value="{{i.Total}}" disabled/></td>
+                                        <td><input type="text" value="{{i.Description}}" disabled/></td>
+                                        <td><input type="text" value="{{i.FirstBrand}}" disabled/></td>
+                                        <td><input type="text" value="{{i.SecondBrand}}" disabled/></td>
+                                        <td><input type="text" value="{{i.ThirdBrand}}" disabled/></td>
+                                        <td><input type="text" value="{{i.FlowRate}}" disabled/></td>
+                                        <td><input type="text" value="{{i.Unit}}" disabled/></td>
+                                        <td><input type="text" value="{{i.ApproxPrice}}" disabled/></td>  
+                                        <td><input type="text" value="{{i.total_Approx_Price}}" disabled/></td>  
+                                        <td><input id="comment" type="text" value="{{i.comment}}" disabled/></td>  
+                                    </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+
+            <div class="col mb-2">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <span id="btnspan">
+                            <form method="get" action="{% url 'ApprovedOrder' annualneed.id %}">
+                                <button class="btn btn-outline-success" type="submit"><b>Approve</b></button>
+                            </form>
+                        </span>
+                        <span id="btnspan">
+                            <form method="get" action="{% url 'needsalteration' annualneed.id %}">
+                                {% csrf_token %}
+                                <button class="btn btn-outline-danger" type="submit"><b>Resend To User</b></button>
+                            </form> 
+                        </span>
+                    </div>
+                </div>
+            </div>
+                <br> <br><br> <br><br>
+        </div>
+    </div>
+
+    
+</body>
+</html>

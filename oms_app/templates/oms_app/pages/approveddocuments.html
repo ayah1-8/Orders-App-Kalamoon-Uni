@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'oms_app/parts/header.html' %}
+<!-- approvedCSS -->
+    <style>
+        body{
+            overflow: auto;
+        }
+        #contain
+        {
+            padding-top:5%;
+            text-align: center;
+        }
+        h1
+        {
+            color: rgb(2, 2, 206);
+        }
+        #contain2
+        {
+            position: relative;
+            width:100%;
+            margin-left: 12%;
+        }
+        input
+        {
+            width: 100%;
+            color: rgb(54, 54, 54);
+            margin: 8px 0;
+            border: 3px solid #ccc;
+            border-radius: 6px;
+            padding: 14px 8px;
+            text-align: center;
+            margin-right:40px;
+        }
+        </style>
+ 
+</head>
+
+<title>Documents</title>
+   
+<body>
+    <section class="jumbotron text-center">
+        <div id="contain" class="container">
+            <h1>Annual Requisition Document </h1>
+         </div>
+    </section>
+
+
+    <div id="contain2" class="container">
+        <div class="row" >
+            <div class="column" >
+                <div class="table">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">Product Name</th>
+                                <th scope="col" class="text-center">Term 1</th>
+                                <th scope="col" class="text-center">Term 2</th>
+                                <th scope="col" class="text-center">Term 3</th>
+                                <th scope="col" class="text-center">Total Quantity</th>
+                                <th scope="col" class="text-center">Description</th>
+                                <th scope="col" class="text-center">Accepted Brand 1</th>
+                                <th scope="col" class="text-center">Accepted Brand 2</th>
+                                <th scope="col" class="text-center">Accepted Brand 3</th>
+                                <th scope="col" class="text-center">Flow Rate</th>
+                                <th scope="col" class="text-center">Unit</th>
+                                <th scope="col" class="text-center">Single Approximate Price</th>
+                                <th scope="col" class="text-right"><a href="{%url 'main:export' annualneed.id%}"><i class="fa fa-file-excel-o" aria-hidden="true"></i> </a>   </th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody >
+                            
+                           
+                            {% for i in annualneedorders %}      
+                                        <tr>
+                                            <td>{{ i.item }}</td>
+                                            <td><input type="text" value="{{i.FirstSemsQuantity}}" disabled/></td>
+                                            <td><input type="text" value="{{i.SecondSemsQuantity}}" disabled/></td>
+                                            <td><input type="text" value="{{i.ThirdSemsQuantity}}" disabled/></td>
+                                            <td><input type="text" value="{{i.Total}}" disabled/></td>
+                                            <td><input type="text" value="{{i.Description}}" disabled/></td>
+                                            <td><input type="text" value="{{i.FirstBrand}}" disabled/></td>
+                                            <td><input type="text" value="{{i.SecondBrand}}" disabled/></td>
+                                            <td><input type="text" value="{{i.ThirdBrand}}" disabled/></td>
+                                            <td><input type="text" value="{{i.FlowRate}}" disabled/></td>
+                                            <td><input type="text" value="{{i.Unit}}" disabled/></td>
+                                            <td><input type="text" value="{{i.ApproxPrice}}" disabled/></td>                                    
+                                        </tr>
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    <div class="col mb-2">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+            
+                
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+
+</html>

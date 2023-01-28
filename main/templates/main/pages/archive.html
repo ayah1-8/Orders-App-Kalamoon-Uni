@@ -1,0 +1,126 @@
+{% extends 'main/pages/base.html' %}
+
+{%block content%}
+<style>
+  * {
+box-sizing: border-box;
+}
+.Note-green
+{
+color: #28694c;
+font-size: 11px;
+}
+.Note-red
+{
+color: #9d0208;
+font-size: 15px;
+
+}
+
+#Naming
+{
+  color:hsl(214, 97%, 27%);
+
+}
+
+/* Float four columns side by side */
+.column {
+float: left;
+width: 25%;
+padding: 10 20px;
+margin-left: 10px ;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -10px;
+column-gap: 35px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+.column {
+width: 100%;
+display: block;
+column-gap: 40px;
+}
+}
+
+/* Style the counter cards */
+.card {
+box-shadow: 0 4px 8px 0 #023e8a;
+color: #023e8a;
+padding: 30px;
+margin-left: 50%;
+text-align: center;
+background-color: #f1f1f1;
+height: 90%;
+width: 110%;
+
+}
+
+#contain
+{
+text-align: center;
+padding-top: 5%;
+}
+a{
+color: rgb(143, 52, 0);
+font-size: 15px;
+}
+
+</style>
+
+<style>
+      .TABLE{
+        margin: 40px;
+        padding: 40px;
+
+    }
+      #Naming,td,th
+    {
+        color:#023e8a;
+    }
+    th{
+        font-size: 24px;
+        text-align: center;
+    }
+
+    td{
+        font-size: 20px;
+    }
+
+</style>
+
+<body>
+<section class="jumbotron text-center">
+  <div class="container">
+    <br> <br><br> <br>
+      <h1 id="Naming">All {{user.RequestingParty}} Annual Need Documents</h1>
+   </div>
+  </section>
+
+
+  <div id="contain" class="container">
+      <div class="row">
+        {%for annualneed in annualneeds%}
+          <div class="column">
+            <div class="card">
+              <h3>{{ forloop.counter }}- {{annualneed.RequestingParty}} Annual Need </h3>
+                <p>{{annualneed.YearDate}} </p>
+                <a href="{%url 'main:ArchiveAN' annualneed.id%}">View Document</a>
+              </div>
+          </div>
+          {%endfor%}
+
+      </div>
+  </div>
+</body>
+
+{%endblock%}

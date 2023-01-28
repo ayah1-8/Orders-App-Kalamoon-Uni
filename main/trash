@@ -1,0 +1,221 @@
+
+'''
+def order(request):
+     #OrderFormSet = inlineformset_factory(ItemsAll,ItemsOrder, fields ='__all__')
+
+     Items = ItemsAll.objects.all() 
+
+     annual_id_S = request.session['annual_id']
+     annualinfo = AnnualNeeds.objects.get(id = annual_id_S)
+     orderform = OrderForm(initial = {'annualneed':annualinfo})
+     #formset = OrderFormSet( instance = Items)
+     if request.method == 'POST':
+          orderform = OrderForm(request.POST)  #pass annualvalue here as instance
+
+          if orderform.is_valid():
+               ####trynaa render the totl bfore its saved lolz :) stoopid now that i look at it
+               test = orderform.save(commit = False)
+               total = orderform.cleaned_data['FirstSems']  +orderform.cleaned_data['SecondSems']  +orderform.cleaned_data['ThirdSems']          
+               test.total = total
+               print(orderform.cleaned_data['total'])
+               test.save()
+
+
+
+     context = {'Items': Items,'annualneed':annualinfo, 'orderform':orderform}
+     return render(request,'main/pages/order.html', context)
+     
+
+
+#######################################################################################################
+def genre(request, tag):  #annualvalue needs to be passed
+     Items = ItemsAll.objects.filter(tagname = tag)
+     Itemsa = ItemsAll.objects.get(Item_Name = 'Pen')
+
+     #annualvalue get from session
+     if request.session.get('annual_id',None)==None:
+          print('wtf')   ##### pass messages to order page to tell user to select an nnual need first
+          return redirect('main:home')
+     annual_id_S = request.session['annual_id']
+     
+
+     annualinfo = AnnualNeeds.objects.get(id = annual_id_S)
+
+     orderform = OrderForm(initial = {'annualneed':annualinfo, 'item':Items} )
+     if request.method == 'POST':
+          orderform = OrderForm(request.POST)  #pass annualvalue here as instance
+
+          if orderform.is_valid():
+               orderform.cleaned_data['total'] = orderform.cleaned_data['FirstSems']  +orderform.cleaned_data['SecondSems']  +orderform.cleaned_data['ThirdSems']          
+               orderform.save()
+
+     orderform = OrderForm(initial = {'annualneed':annualinfo, 'item':Items} )
+
+     context = {'Items': Items, 'orderform':orderform,'annualneed':annualinfo}
+     return render(request,'main/pages/order.html', context)
+
+
+
+#######################################################################################################
+@login_required(login_url='main:login')
+@allowed_users(allowed_roles=['normal users'])
+def home(request):
+     annualneedform = AnnualNeedsForm()
+     currentdjangouser_S = request.session['current_djangouser_id']
+     ######user id sqlite with correlationto the djangouser from session stored
+     a = Users.objects.get(user = currentdjangouser_S)   ### we need to get id from session of user in login page
+     annualneedform = AnnualNeedsForm(initial={'user':a , 'Faculity': a.Faculity })
+     id = None
+     if request.method == 'POST':
+          annualneedform = AnnualNeedsForm(request.POST)
+          #annual_year = request.POST.get('YearDate')
+
+          if annualneedform.is_valid():
+               x1 = annualneedform.save()
+               x = x1.pk
+               id =x
+               request.session['annual_id'] = x      #####each time the users sends a form it saves th annual id into this session
+               annual_id_S = x
+               
+     ############ Render All Annual Needs THis user from this Fculity Has Not neccessirely this User
+     allannualneeds = AnnualNeeds.objects.filter(Faculity = a.Faculity)
+     context = {'annualform': annualneedform,'allannualneeds':allannualneeds, 'need_id':id}
+     return render(request,'main/pages/home.html',context)
+    
+#######################################################################################################
+def all(request):
+
+     ## all the orders that have been ordered and sent to the vice president
+     ### maybe even queue them by year // filtering them
+     context = {}
+     return render(request,'main/pages/order.html',context)
+
+
+#######################################################################################################
+@login_required(login_url='main:login')
+def allannualitems(request):  
+     #annual_id_S = need_id
+     annual_id_S = request.session['annual_id']
+
+     Items = ItemsOrder.objects.filter(annualneed=annual_id_S)
+     annualinfo = AnnualNeeds.objects.get(id = annual_id_S)
+     
+
+
+     context = {'Items': Items,'annualneed':annualinfo}
+     return render(request,'main/pages/test.html', context)
+
+#######################################################################################################
+@login_required(login_url='main:login')
+@allowed_users(allowed_roles=['normal users'])
+def confirm(request):
+     annual_id_S = request.session['annual_id']
+     annualinfo = AnnualNeeds.objects.get(id = annual_id_S)
+     annualinfo.fields['complete']=True
+     ########################## once the user confirms the annual needs it must be 'sent' to the vice president
+     ########y3ni only the Confirmed annual needds must be shown to the vice presidnet
+
+     return render(request,'main/pages/test.html')
+
+#######################################################################################################   
+##User Home View
+@login_required(login_url='main:login')
+def UserHome(request):
+     item = None
+     items = Item.objects.all()
+     if request.method == 'POST':
+          itemid = request.POST.get("items")
+          item = Item.objects.get(id = itemid)
+     if request.method == 'POST':
+          orderform = OrderForm(request.POST) 
+          if orderform.is_valid():
+               orderform.save()
+
+     orderform = OrderForm(initial = { 'item':item} )
+     context = {'items': items,'item': item,'orderform':orderform}
+     return render(request,'main/pages/home1.html',context)
+
+
+#######################################################################################################   
+##Pass Id of sepcific item/order :))))
+def AddOrder(request,pk):
+     Annualneed = AnnualNeed.objects.get(pk = pk)
+     print(Annualneed)
+
+     the_complete_status = getattr(Annualneed, 'complete')
+
+     if(the_complete_status == True):
+          print('The annual Need Is Confirmed')
+          return redirect('main:userhome')
+     
+     orders = Order.objects.filter(annualneed = Annualneed)
+     orderform = OrderForm(initial = {'annualneed':Annualneed})
+     #orderform = OrderForm(request.POST or None)
+
+     if request.method == "POST":
+          orderform = OrderForm(request.POST )
+          if orderform.is_valid():
+               order = orderform.save(commit=False)
+               order.annualneed = Annualneed
+               order.save()
+               return redirect("main:OrderDetail", pk=order.id)
+          else:
+               return render(request,'main/partials/Order-form.html',{'orderform':orderform})
+
+     context = {'orderform':orderform, 'Annualneed':Annualneed,'orders':orders}
+     return render(request,'main/pages/order1.html',context)
+
+
+#######################################################################################################   
+##Add Order default one all items showing  **** this is where i initiate the annualneed
+def AddOrder(request,pk):
+     Annualneed = AnnualNeed.objects.get(pk = pk)
+
+     the_complete_status = getattr(Annualneed, 'complete')
+
+     if(the_complete_status == True):
+          print('The annual Need Is Confirmed')
+          return redirect('main:userhome')
+     
+     orders = Order.objects.filter(annualneed = Annualneed)
+     orderform = OrderForm(initial = {'annualneed':Annualneed})
+     #orderform = OrderForm(request.POST or None)
+
+     if request.method == "POST":
+          item = request.POST.get('item')
+          FirstSemsQuantity = request.POST.get('FirstSemsQuantity')
+          SecondSemsQuantity = request.POST.get('SecondSemsQuantity')
+          ThirdSemsQuantity = request.POST.get('ThirdSemsQuantity')
+          Description = request.POST.get('Description')
+          FirstBrand = request.POST.get('FirstBrand')
+          SecondBrand = request.POST.get('SecondBrand')
+          ThirdBrand = request.POST.get('ThirdBrand')
+          FlowRate = request.POST.get('FlowRate')
+          Unit = request.POST.get('Unit')
+          ApproxPrice = request.POST.get('ApproxPrice')
+          annualneed = request.POST.get('annualneed')
+          
+          order = Order(
+               item=item,
+               FirstSemsQuantity=FirstSemsQuantity,
+               SecondSemsQuantity=SecondSemsQuantity,
+               ThirdSemsQuantity=ThirdSemsQuantity,
+               ApproxPrice=ApproxPrice)
+
+
+     context = {'orderform':orderform, 'Annualneed':Annualneed,'orders':orders}
+     return render(request,'main/pages/order1.html',context)
+
+
+#######################################################################################################   
+##Add Order default one all items showing  **** this is where i initiate the annualneed
+
+{%url 'main:OrderFormTag' 'General'%}
+
+<select name="item" class="custom-select mb-4">
+        <option selected >Choose An Item</option>
+        {%for item in items%}
+        <option value="{{item.pk}}">{{item.ItemName}}</option>
+        {%endfor%}
+        </select>
+'''

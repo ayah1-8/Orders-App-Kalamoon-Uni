@@ -1,0 +1,238 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'" rel="stylesheet" id="bootstrap-css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+
+</head>
+<title>Requisition Document</title>
+
+<style>
+    #splitmain{ 
+        width:100%; 
+        height:100%; 
+    } 
+    .left-column{ 
+        float:left;
+        width: 50% ;
+    } 
+    .right-column{ 
+        float:right; 
+        width: 50% 
+    } 
+    #OrderBtn
+    {
+        width: 180px;
+    }
+</style>
+
+
+<body>
+    {% include 'oms_app/parts/header.html' %}
+    {% include 'oms_app/parts/sidebar.html' %}
+
+    <section class="jumbotron text-center">
+        <div class="container">
+                <br> <br>  <br>  
+            <h1>Annual Requisition Document </h1>
+                <br> 
+         </div>
+    </section>
+
+    <div id="splitmain"> 
+
+        <div class="left-column"> 
+        <section class="jumbotron text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">Items</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Paper</td>
+                                    <td>
+                                        <button class="w3-button w3-circle w3-black">+</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Pen</td>
+                                    <td>
+                                        <button class="w3-button w3-circle w3-black">+</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>File</td>
+                                    <td>
+                                        <button class="w3-button w3-circle w3-black">+</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Batteries</td>
+                                    <td>
+                                        <button class="w3-button w3-circle w3-black">+</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Printer Ink</td>
+                                    <td>
+                                        <button class="w3-button w3-circle w3-black">+</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mouse</td>
+                                    <td>
+                                        <button class="w3-button w3-circle w3-black">+</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Keyboard</td>
+                                    <td>
+                                        <button class="w3-button w3-circle w3-black">+</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Papers</td>
+                                    <td>
+                                        <button class="w3-button w3-circle w3-black">+</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Printer</td>
+                                    <td>
+                                        <button class="w3-button w3-circle w3-black">+</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Printer</td>
+                                    <td>
+                                        <button class="w3-button w3-circle w3-black">+</button>
+                                    </td>
+                                </tr>  
+                                <tr>
+                                    <td>Printer</td>
+                                    <td>
+                                        <button class="w3-button w3-circle w3-black">+</button>
+                                    </td>
+                                </tr>  
+                                <tr>
+                                    <td>Printer</td>
+                                    <td>
+                                        <button class="w3-button w3-circle w3-black">+</button>
+                                    </td>
+                                </tr>    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+         </div>
+        </section>        
+        </div>
+
+
+        
+        <div class="right-column"> 
+            <section class="jumbotron text-center">
+            <div class="container" >
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">Product Name</th>
+                                        <th scope="col" class="text-center"></th>
+                                        <th scope="col" class="text-right"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Term 1</td>
+                                    <td><input class="form-control" type="text" value=""/></td>
+                                </tr>
+                                <tr>
+                                    <td>Term 2</td>
+                                    <td><input class="form-control" type="text" value=""/></td>
+                                </tr>
+                                <tr>
+                                    <td>Term 3</td>
+                                    <td><input class="form-control" type="text" value=""/></td>
+                                </tr>
+                                <tr>
+                                    <td>Total Quantity</td>
+                                    <td><input class="form-control" type="text" value=""/></td>
+                                </tr>
+                                <tr>
+                                    <td>Description</td>
+                                    <td><input class="form-control" type="text" value=""/></td>
+                                </tr>
+                                <tr>
+                                    <td>Accepted Brand 1</td>
+                                    <td><input class="form-control" type="text" value=""/></td>
+                                </tr>
+                                <tr>
+                                    <td>Accepted Brand 2</td>
+                                    <td><input class="form-control" type="text" value=""/></td>
+                                </tr>
+                                <tr>
+                                    <td>Accepted Brand 3</td>
+                                    <td><input class="form-control" type="text" value=""/></td>
+                                </tr>
+                                <tr>
+                                    <td>Flow Rate</td>
+                                    <td><input class="form-control" type="text" value=""/></td>
+                                </tr>
+                                <tr>
+                                    <td>Unit</td>
+                                    <td><input class="form-control" type="text" value=""/></td>
+                                </tr>
+                                <tr>
+                                    <td>Single Approximate Price</td>
+                                    <td><input class="form-control" type="text" value=""/></td>
+                                </tr>
+                                <tr>
+                                    <td>Total Approximate Price</td>
+                                    <td><input class="form-control" type="text" value=""/></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col mb-2">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 text-right">
+                                <button class="w3-button w3-circle w3-black">Add To Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            </section>
+        </div>
+    
+    </div>
+
+    <p><button id="OrderBtn" class="w3-button w3-black w3-xlarge">Check Order</button></p>
+    <br>
+
+       
+
+</body>
+
+{% include 'oms_app/parts/footer.html' %}
+</html>

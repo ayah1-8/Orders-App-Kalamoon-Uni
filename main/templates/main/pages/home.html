@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'" rel="stylesheet" id="bootstrap-css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    {% include 'main/parts/header.html' %}
+
+    <title>Home</title>
+
+</head>
+<style>
+    * {
+box-sizing: border-box;
+}
+.Note-green
+{
+color: #28694c;
+font-size: 15px;
+}
+.Note-red
+{
+color: #9d0208;
+font-size: 15px;
+
+}
+
+#Naming
+{
+    color:hsl(214, 97%, 27%);
+
+}
+
+/* Float four columns side by side */
+.column {
+float: left;
+width: 25%;
+padding: 10 20px;
+margin-left: 10px ;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -10px;
+column-gap: 35px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+.column {
+width: 100%;
+display: block;
+column-gap: 40px;
+}
+}
+
+/* Style the counter cards */
+.card {
+box-shadow: 0 4px 8px 0 #023e8a;
+color: #023e8a;
+padding: 30px;
+margin-left: 30%;
+text-align: center;
+background-color: #f1f1f1;
+height: 90%;
+width: 120%;
+
+}
+
+#contain
+{
+text-align: center;
+padding-top: 15%;
+}
+a{
+color: rgb(143, 52, 0);
+font-size: 15px;
+}
+
+  </style>
+
+
+<body> 
+
+ 
+
+        <div id="contain" class="container" >
+            <div class="row">
+                <div class="column">
+                  <div class="card">
+                    <h4>{{year}} Annual Needs' Document</h4>
+                    <br><br>
+                    <p>Add Items to {{year}}'s Current Document</p>
+                    {%if complete == False and status != 'Needs Alteration'%}
+                    <p class="Note-green">Document Status: Ready</p>
+                    {% elif status == 'Being Reviewed' %}
+                    <p class="Note-green">Document Status: Being Reviewed</p>
+                    {%else%}
+                    <p class="Note-red">No Document Here</p>
+                    {%endif%}
+                    {%if complete == False and status != 'Needs Alteration'%}
+                    <a href="{%url 'main:AddOrder' annualneed.id %}">View Document</a>
+                    {%else%}
+                    <hr>
+                    <a href="#">View Document</a>
+                    {%endif%}
+                    <br>
+
+                  </div>
+                </div>
+                
+                  <div class="column">
+                    <div class="card">
+                      <h4>{{annualneed.yearofdoc}} Annual Needs' Document To Be Altered</h4>
+                      <br>
+                      <p>Make Adjusmets concerning the Vice Presidents' Comments</p>
+                      {%if status == "Needs Alteration"%}
+                      <p class="Note-green">Document Status: Ready</p>
+                      {%else%}
+                      <p class="Note-red">No Document Here</p>
+                      {%endif%}
+                      {%if status == "Needs Alteration"%}
+                      <hr>
+                      <a href="{%url 'main:ANDoc2Alter' annualneed.id%}">View Document</a>
+                      {%endif%}                    
+                    </div>
+                  </div>
+
+                  <div class="column">
+                    <div class="card">
+                      <br>
+                      <h4>Archive</h4>
+                      <br><br><br>
+                      <p>View all Documents For All Years</p>
+                      <br><br>                    
+
+                      <a href="{%url 'main:Archive' %}">View Archive</a>
+                    </div>
+                  </div>
+            </div>
+        </div>
+      </body>
+
+</html>

@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'" rel="stylesheet" id="bootstrap-css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+    
+
+
+</head>
+
+<style>
+    #Naming
+    {
+        color:#023e8a;
+    
+    }
+    .addorder {
+        margin: 8px 8px;
+        padding: 10px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .number {
+        width: 60px;
+        padding: 2px 2px;
+        margin: 8px 8px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }.text {
+        width: 120px;
+        padding: 2px 2px;
+        margin: 8px 8px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }.drop {
+        padding: 2px 2px;
+        margin: 8px 8px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+</style>
+<body>
+    <script>
+     
+        document.body.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        })
+    </script>
+
+    {% include 'main/parts/header.html' %}
+
+<section class="jumbotron text-center">
+   
+        <select name="tags" class="custom-select mb-2" 
+                hx-get="{%url 'main:OrderForm' Annualneed.id %}"
+                hx-swap="beforeend" 
+                hx-trigger= "change"
+                hx-target = "#OrderForms">
+                    <option selected >Choose A Category</option>
+                    <option value="All Categories">All Categories</option>
+                    <option value="General">General</option>
+                    <option value="Medical">Medical</option>
+                    <option value="IT">IT</option>
+                    <option value="Engineering">Engineering</option>
+        
+                </select>
+</section>
+
+<section>
+
+    <form method="POST">
+        {%csrf_token%}
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Product Name</th>
+                        <th scope="col" class="text-center">Term 1</th>
+                        <th scope="col" class="text-center">Term 2</th>
+                        <th scope="col" class="text-center">Term 3</th>
+                        <th scope="col" class="text-center">Description</th>
+                        <th scope="col" class="text-center">Accepted Brand 1</th>
+                        <th scope="col" class="text-center">Accepted Brand 2</th>
+                        <th scope="col" class="text-center">Accepted Brand 3</th>
+                        <th scope="col" class="text-center">Flow Rate</th>
+                        <th scope="col" class="text-center">Unit</th>
+                        <th scope="col" class="text-center">Single Approximate Price</th>
+                        <th scope="col" class="text-center"></th>
+                    </tr>
+                </thead>
+                <tr>
+    
+                        <td class="text-center">{{orderform.item}}</td>
+                        <td class="text-center">{{orderform.FirstSemsQuantity}}</td>
+                        <td class="text-center">{{orderform.SecondSemsQuantity}}</td>
+                        <td class="text-center">{{orderform.ThirdSemsQuantity}}</td>
+                        <td class="text-center">{{orderform.Description}}</td>
+                        <td class="text-center">{{orderform.FirstBrand}}</td>
+                        <td class="text-center">{{orderform.SecondBrand}}</td>
+                        <td class="text-center">{{orderform.ThirdBrand}}</td>
+                        <td class="text-center">{{orderform.FlowRate}}</td>
+                        <td class="text-center">{{orderform.Unit}}</td>
+                        <td class="text-center">{{orderform.ApproxPrice}}</td>
+                        <td></td>
+                        <td style="display: hidden;">{{orderform.annualneed.as_hidden}}</td>
+      
+                        <td><button type="submit" 
+                            hx-post="{%url 'main:add' Annualneed.id %}"
+                            hx-target="#OrderForms" 
+                            class="btn btn-outline-dark">Submit</button></td>
+
+                    </tr>
+    
+                    <tr>
+                        <td class="text-center">{{orderform.item.errors}}</td>
+                        <td class="text-center">{{orderform.FirstSemsQuantity.errors}}</td>
+                        <td class="text-center">{{orderform.SecondSemsQuantity.errors}}</td>
+                        <td class="text-center">{{orderform.ThirdSemsQuantity.errors}}</td>
+                        <td class="text-center">{{orderform.Description.errors}}</td>
+                        {{orderform.Description.errors.errors}}
+    
+                        <td class="text-center">{{orderform.FirstBrand.errors}}</td>
+                        <td class="text-center">{{orderform.SecondBrand.errors}}</td>
+                        <td class="text-center">{{orderform.ThirdBrand.errors}}</td>
+                        <td class="text-center">{{orderform.FlowRate.errors}}</td>
+                        <td class="text-center">{{orderform.Unit.errors}}</td>
+                        <td class="text-center">{{orderform.ApproxPrice.errors}}</td>
+                        <td></td>
+                        <td style="display: hidden;">{{orderform.annualneed.as_hidden}}</td>
+            
+    
+                    
+                    </tr>        
+            </table>
+        </form>
+
+        <div id="OrderForms">
+
+            {%include "main/partials/Order-detail.html"%}
+
+        </div>
+</section>
+
+</body>

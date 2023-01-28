@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'" rel="stylesheet" id="bootstrap-css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+
+
+
+
+    {% include 'oms_app/parts/header.html' %}
+
+    <style>
+      #contain
+      {
+      padding-top:5%;
+      text-align: center;
+      }
+      h1
+      {
+          color: rgb(2, 2, 206);
+      }
+      #btnspan
+      {
+          float:left;
+          margin-right: 10px;
+      }
+      #contain2
+      {
+          position: relative;
+          width:100%;
+          margin-left: 13%;
+      }
+      input
+       {
+          width: 100%;
+          color: rgb(54, 54, 54);
+          margin: 8px 0;
+          border: 3px solid #ccc;
+          border-radius: 6px;
+          padding: 13px 4px;
+          text-align: center;
+          margin-right:40px;
+          
+          }
+    
+          #inputcomment
+          {
+              width: 270px ;
+          }
+     
+      </style>
+
+</head>
+
+<body>
+
+  <section class="jumbotron text-center">
+      <div id="contain" class="container">
+        <h1>Items</h1>
+      </div>
+  </section>
+
+  <div id="contain2" class="container">
+      <div class="row" >
+          <div class="column" >
+              <div class="table">
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th scope="col" class="text-center">Item Name</th>
+                              <th scope="col" class="text-center">Description</th>
+                              <th scope="col" class="text-center">Quantity</th>
+                              <th scope="col" class="text-center">Brand</th>
+                          </tr>
+                      </thead>
+
+                      <tbody>
+                       
+                {% for i, value in neverrequesteditems.items %}
+                                  <tr>
+                                      <td><input type="text" value="{{value.ItemName}}" disabled/></td>
+                                      <td><input type="text" value="{{value.Description}}" disabled/></td>
+                                      <td><input type="text" value="{{value.Quantity}}" disabled/></td>
+                                      <td><input type="text" value="{{value.Brand}}" disabled/></td>                                   
+                                  </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+
+</body>
+
+
+
+
+</html>

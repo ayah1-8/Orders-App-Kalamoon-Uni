@@ -1,0 +1,163 @@
+{% extends 'main/pages/base.html' %}
+
+{%block content%}
+    <!-- style for cards -->
+    <style>
+      
+        * {
+  box-sizing: border-box;
+  }
+  
+  /* Float four columns side by side */
+  .column {
+  float: left;
+  width: 25%;
+  padding: 10 20px;
+  margin-left: 10px ;
+  }
+  
+  /* Remove extra left and right margins, due to padding */
+  .row {margin: 0 -10px;
+    row-gap: 35px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+  content: "";
+  display: table;
+  clear: both;
+  }
+  
+  /* Responsive columns */
+  @media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    column-gap: 40px;
+  }
+  }
+  
+  /* Style the counter cards */
+  .card {
+  box-shadow: 0 4px 8px 0 #023e8a;
+  color: 023e8a;
+  padding: 30px;
+  margin-left: 105%;
+  text-align: center;
+  background-color: #f1f1f1;
+  height: 100%;
+  width: 100%;
+  
+  }
+  
+  #contain
+  {
+    padding-top:10%;
+  text-align: center;
+  }
+  a{
+  color: rgb(143, 52, 0);
+  }
+  
+      </style>
+<style>
+    .imp
+    {
+        color:red;
+
+    }
+    .orderformcontainer
+    {
+        margin-left: 50px ;
+        margin-right: 70px ;
+
+    }
+    #Naming
+    {
+        color:#023e8a;
+    
+    }
+    .addorder {
+        margin: 8px 8px;
+        padding: 10px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .number {
+        width: 60px;
+        padding: 2px 2px;
+        margin: 8px 8px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }.text {
+        width: 120px;
+        padding: 2px 2px;
+        margin: 8px 8px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }.drop {
+        padding: 2px 2px;
+        margin: 8px 8px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+</style>
+
+
+<div id="contain" class="container" >
+    <div class="row">
+        <div class="column">
+          <div class="card">
+            <h5 id="Naming">Choose Category To Add Item to Annual Need</h5>
+            <select name="tags" class="btn btn-secondary dropdown-toggle" 
+                        hx-get="{%url 'main:OrderForm' Annualneed.id %}"
+                        hx-trigger= "change"
+                        hx-target = "#Order">
+                            <option selected >Choose A Category</option>
+                            <option value="All Categories">All Categories</option>
+                            <div class="dropdown-divider"></div>
+                            <option value="General">General</option>
+                            <option value="Medical">Medical</option>
+                            <option value="IT">IT</option>
+                            <option value="Engineering">Engineering</option>
+                
+                </select>
+          </div>
+        </div>
+        
+          <div class="column">
+            <div class="card">
+                <h5 id="Naming">Confirm Annual Need</h5><br><br>
+                <a href="{%url 'main:Confirm' Annualneed.id%}">
+                    <button  class="btn btn-outline-secondary">
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>Confirm Annual Need</button> 
+                </a>
+            </div>
+          </div>
+
+    </div>
+</div>       
+                
+        <br>
+
+        
+</section>  
+    <tbody>
+        <tr><div id="Order" class="orderformcontainer">          </div></tr>           
+                                
+        <tr><div id="OrderForms">
+            {%include "main/partials/Order-detail.html"%}
+                                    
+            </div>  
+        </tr>                
+                        
+    
+        
+{%endblock%}

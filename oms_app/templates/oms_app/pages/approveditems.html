@@ -1,0 +1,268 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+
+    {% include 'oms_app/parts/header.html' %}
+
+    <!-- style for cards -->
+    <style>
+      body {
+        overflow: auto;
+      }
+      #std {
+        padding-top: 3%;
+      }
+
+      #items {
+        padding-top: 3%;
+        text-align: center;
+        font-size: large;
+      }
+      h1 {
+        color: rgb(2, 2, 206);
+        text-align: center;
+      }
+      #contain2 {
+        position: relative;
+        width: 100%;
+        text-align: center;
+      }
+      #contain {
+        padding-top: 10%;
+        text-align: center;
+      }
+      input {
+        width: 100%;
+        color: rgb(54, 54, 54);
+        margin: 8px 0;
+        border: 3px solid #ccc;
+        border-radius: 6px;
+        padding: 14px 8px;
+        text-align: center;
+        margin-right: 40px;
+      }
+      #appbtn {
+        text-align: center;
+      }
+    </style>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      /* Create two equal columns that floats next to each other */
+      .columnsplit {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        height: 300px; /* Should be removed. Only for demonstration */
+        text-align: center;
+      }
+
+      /* Clear floats after the columns */
+      .rowsplit:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    </style>
+  </head>
+
+  <title>Items</title>
+  <body>
+    <div class="rowsplit">
+      <div class="columnsplit" id="contain">
+        <div class="container c">
+          <h1>Approve A New Quantity</h1>
+          <div id="contain2" class="container">
+            <div class="row">
+              <div class="column">
+                <div class="table">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-center">Product Name</th>
+                        <th scope="col" class="text-center">Total Quantity</th>
+                        <th scope="col" class="text-center">
+                          Click To Approve
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <form
+                          method="POST"
+                          action="{% url 'approvequantities' %}"
+                        >
+                          {%csrf_token%}
+                          <td>
+                            <select name="dropdown" required>
+                              <option value="" selected disabled>
+                                Choose An Item
+                              </option>
+                              {%for i,j in allitems.items %}
+                              <option value="">{{i}}</option>
+                              {%endfor%}
+                            </select>
+                          </td>
+                          <!-- <td>  <input type="text" id="inp" name="dropdown" value="{{info_item}}" required disabled/></td> -->
+                          <td>
+                            <input
+                              type="text"
+                              id="inp"
+                              name="approvedquantity"
+                              value="{{info_quantity}}"
+                              required
+                            />
+                          </td>
+                          <td id="std">
+                            <button type="submit" class="btn btn-primary">
+                              Aprrove
+                            </button>
+                          </td>
+                        </form>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h1>Set Quantities Manually</h1>
+          <div id="contain2" class="container">
+            <div class="row">
+              <div class="column">
+                <div class="table">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-center">Product Name</th>
+                        <th scope="col" class="text-center">
+                          First Semester Quantity
+                        </th>
+                        <th scope="col" class="text-center">
+                          Second Semester Quantity
+                        </th>
+                        <th scope="col" class="text-center">
+                          Third Semester Quantity
+                        </th>
+                        <th scope="col" class="text-center">Total Quantity</th>
+                        <th scope="col" class="text-center">
+                          Click To Approve
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <form method="POST">
+                          {%csrf_token%}
+                          <td id="std">{{obj.item.ItemName}}</td>
+                          <td>
+                            <input
+                              type="text"
+                              id="inp"
+                              name="FirstSemQuantity"
+                              value="{{obj.FirstSemsQuantity}}"
+                              required
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              id="inp"
+                              name="SecondSemQuantity"
+                              value="{{obj.SecondSemsQuantity}}"
+                              required
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              id="inp"
+                              name="ThirdSemQuantity"
+                              value="{{obj.ThirdSemsQuantity}}"
+                              required
+                            />
+                          </td>
+                          <td id="std">{{obj.Total}}</td>
+                          <td id="std">
+                            <button type="submit" class="btn btn-primary">
+                              Aprrove
+                            </button>
+                          </td>
+                        </form>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columnsplit" id="contain">
+        {% for i,j in allitems.items %}
+        <h2>{{i}} -Total Quantity: {{j}}</h2>
+        <div class="row">
+          <div class="column">
+            <div class="table">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col" class="text-center">Requester</th>
+                    <th scope="col" class="text-center">
+                      1st semester Quantity
+                    </th>
+                    <th scope="col" class="text-center">
+                      2nd semester Quantity
+                    </th>
+                    <th scope="col" class="text-center">
+                      3rd semester Quantity
+                    </th>
+                    <th scope="col" class="text-center">Total Quantity</th>
+                    <th scope="col" class="text-center">Change Qunatities</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%for o in ordersobj%} {%if o.item.ItemName == i %}
+                  <tr>
+                    <td><b>{{o.annualneed.RequestingParty}}</b></td>
+                    <td>{{o.FirstSemsQuantity}}</td>
+                    <td>{{o.SecondSemsQuantity}}</td>
+                    <td>{{o.ThirdSemsQuantity}}</td>
+                    <td>{{o.Total_Quantity}}</td>
+                    <td>
+                      <a href="{%url 'approveditems1' o.id%}"
+                        ><button class="btn btn-primary">Change</button>
+                      </a>
+                    </td>
+                  </tr>
+                  {%endif%} {%endfor%}
+                </tbody>
+              </table>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

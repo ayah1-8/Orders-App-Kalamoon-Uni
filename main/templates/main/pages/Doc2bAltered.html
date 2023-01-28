@@ -1,0 +1,143 @@
+{% extends 'main/pages/base.html' %}
+
+{%block content%}
+
+<style>
+    #Naming
+    {
+        color:#023e8a;
+    
+    }
+    #Naming2
+    {
+        color:#023e8a;
+    font-size: 20px;;
+    }
+
+    .addorder {
+        margin: 8px 8px;
+        padding: 10px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .number {
+        width: 60px;
+        padding: 2px 2px;
+        margin: 8px 8px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }.text {
+        width: 120px;
+        padding: 2px 2px;
+        margin: 8px 8px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }.drop {
+        padding: 2px 2px;
+        margin: 8px 8px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+</style>
+<section class="jumbotron text-center">
+    <div class="container">
+        <br> <br><br> 
+        <h1 id="Naming">{{Annualneed}} </h1>
+        <h2 id="Naming2">Status: To Be Altered </h2>
+
+    </div>
+     <br>
+     <div class="container">
+        <a href="{%url 'main:Confirm' Annualneed.id%}">
+            <button  class="btn btn-outline-dark">
+                <i class="fa fa-check-circle" aria-hidden="true"></i>Confirm Annual Need</button> 
+        </a> 
+
+       
+ </div>
+ <div>
+
+</section>
+
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">#</th>
+                        <th scope="col" class="text-center">Product Name</th>
+                        <th scope="col" class="text-center">Term 1</th>
+                        <th scope="col" class="text-center">Term 2</th>
+                        <th scope="col" class="text-center">Term 3</th>
+                        <th scope="col" class="text-center">Total Quantity</th>
+                        <th scope="col" class="text-center">Description</th>
+                        <th scope="col" class="text-center">Accepted Brand 1</th>
+                        <th scope="col" class="text-center">Accepted Brand 2</th>
+                        <th scope="col" class="text-center">Accepted Brand 3</th>
+                        <th scope="col" class="text-center">Flow Rate</th>
+                        <th scope="col" class="text-center">Unit</th>
+                        <th scope="col" class="text-center">Single Approximate Price</th>
+                        <th scope="col" class="text-center">Total Approximate Price</th>
+                        <th scope="col" class="text-center">Comment</th>
+                        <th scope="col" class="text-right"></th>
+                        <th> </th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+<div id = ""></div>
+{% for order in orders %}
+
+                    <tr>
+                        <td class="text-center">{{forloop.counter}}</td>
+                        <td class="text-center">{{order.item.ItemName}}</td>
+                        <td class="text-center">{{order.FirstSemsQuantity}}</td>
+                        <td class="text-center">{{order.SecondSemsQuantity}}</td>
+                        <td class="text-center">{{order.ThirdSemsQuantity}}</td>
+                        <td class="text-center">{{order.Total_Quantity}}</td>
+                        <td class="text-center">{{order.Description}}</td>
+                        <td class="text-center">{{order.FirstBrand}}</td>
+                        <td class="text-center">{{order.SecondBrand}}</td>
+                        <td class="text-center">{{order.ThirdBrand}}</td>
+                        <td class="text-center">{{order.FlowRate}}</td>    
+                        <td class="text-center">{{order.Unit}}</td>
+                        <td class="text-center">{{order.ApproxPrice}}</td>
+                        <td class="text-center">{{order.total_Approx_Price}}</td>
+                        <td class="text-center">{{order.comment}}</td>
+                        <td></td>
+                    <!-- <div > -->
+                        <td><a href="{% url 'main:OrderUpdate2b' order.id %}"><button class="btn btn-secondary">Update</button></a></td>
+                        <form method="POST" action="{% url 'main:deleteorder' order.id %}">
+                            {% csrf_token %}
+                        <td> <button type="submit" class="btn btn-danger">Delete</button></td>
+                        </form>
+                        <!-- </div> -->
+                </tr>
+
+
+
+
+            {% endfor %}   
+
+</tbody>
+</table>
+                       
+               
+                    
+                    
+</div>
+            </div>
+        </div>
+        
+                     
+
+
+{%endblock%}

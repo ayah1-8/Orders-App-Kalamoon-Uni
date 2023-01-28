@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'" rel="stylesheet" id="bootstrap-css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+
+
+    {% include 'oms_app/parts/header.html' %}
+    <!-- style for cards -->
+    <style>
+      * {
+box-sizing: border-box;
+}
+
+/* Float four columns side by side */
+.column {
+float: left;
+width: 25%;
+padding: 10 20px;
+margin-left: 10px ;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -10px;
+  row-gap: 35px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+.column {
+  width: 100%;
+  display: block;
+  column-gap: 40px;
+}
+}
+
+/* Style the counter cards */
+.card {
+box-shadow: 0 4px 8px 0 rgb(14, 0, 204);
+color: blue;
+padding: 30px;
+margin-left: 50%;
+text-align: center;
+background-color: #f1f1f1;
+height: 100%;
+width: 100%;
+
+}
+
+#contain
+{
+padding-top:16%;
+text-align: center;
+}
+a{
+color: rgb(143, 52, 0);
+}
+
+    </style>
+    
+
+</head>
+    <title>Documents</title>
+   
+        <body>
+        <div id="contain" class="container">
+            <div class="row">
+            {% for i in annualneeds %}
+                <div class="column">
+                  <div class="card">
+                    <h3>{{i.RequestingParty}}</h3>
+                    <p>{{i.YearDate}}</p>
+                    <a href="{% url 'annualneedspendingrp' i.id %}">View Order</a>
+                  </div>
+                </div>
+
+                {%empty%}
+                <h1>No Pending Annual Needs</h1>
+            {% endfor %}
+            </div>
+        </div>
+
+      </body>
+
+
+
+</html>

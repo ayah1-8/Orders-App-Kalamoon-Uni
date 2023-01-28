@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login </title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.png' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+
+</head>
+
+<body style="background-color: #666666;">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" method="POST" action="">
+					{% csrf_token %}
+					<span class="login100-form-title p-b-43">
+						LOG IN
+					</span>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate="UserName is required">
+						<input placeholder="UserName" class="input100" type="text" name= 'username' >
+						<span class="focus-input100"></span>
+					</div>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input placeholder="Password" class="input100" type="password" name="password">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="flex-sb-m w-full p-t-3 p-b-32">
+					</div>
+			
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type='submit'>
+							Log In
+						</button>
+					</div>
+									
+				</form>
+
+				<div class="login100-more" >
+					<img src="{% static 'images/uok.gif' %}" alt="centered image"style=" position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);" >
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+	<script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+	<script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+	<script src="{% static 'js/main.js"></script>
+</body>
+
+</html>

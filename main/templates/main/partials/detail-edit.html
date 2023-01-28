@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">#</th>
+                        <th scope="col" class="text-center">Product Name</th>
+                        <th scope="col" class="text-center">Term 1</th>
+                        <th scope="col" class="text-center">Term 2</th>
+                        <th scope="col" class="text-center">Term 3</th>
+                        <th scope="col" class="text-center">Total Quantity</th>
+                        <th scope="col" class="text-center">Description</th>
+                        <th scope="col" class="text-center">Accepted Brand 1</th>
+                        <th scope="col" class="text-center">Accepted Brand 2</th>
+                        <th scope="col" class="text-center">Accepted Brand 3</th>
+                        <th scope="col" class="text-center">Flow Rate</th>
+                        <th scope="col" class="text-center">Unit</th>
+                        <th scope="col" class="text-center">Single Approximate Price</th>
+                        <th scope="col" class="text-center">Total Approximate Price</th>
+                        <th scope="col" class="text-center">Comment</th>
+                        <th scope="col" class="text-right"></th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                            <tbody>
+
+{% for order in orders %}
+
+
+
+            <tr>
+                        <td class="text-center">{{forloop.counter}}</td>
+                        <td class="text-center">{{order.item.ItemName}}</td>
+                        <td class="text-center">{{order.FirstSemsQuantity}}</td>
+                        <td class="text-center">{{order.SecondSemsQuantity}}</td>
+                        <td class="text-center">{{order.ThirdSemsQuantity}}</td>
+                        <td class="text-center">{{order.Total_Quantity}}</td>
+                        <td class="text-center">{{order.Description}}</td>
+                        <td class="text-center">{{order.FirstBrand}}</td>
+                        <td class="text-center">{{order.SecondBrand}}</td>
+                        <td class="text-center">{{order.ThirdBrand}}</td>
+                        <td class="text-center">{{order.FlowRate}}</td>    
+                        <td class="text-center">{{order.Unit}}</td>
+                        <td class="text-center">{{order.ApproxPrice}}</td>
+                        <td class="text-center">{{order.total_Approx_Price}}</td>
+                    <td></td>
+                    <!-- <div > -->
+                        <td><a href="{% url 'main:OrderUpdate' order.id %}">
+                            <button class="btn btn-secondary">Update</button></a></td>
+                        <td><button hx-post="{% url 'main:OrderDelete' order.id %}" 
+                                    hx-target = "#OrderForms"
+                                    hx-confirm = "Are You sure you wish to Delte This Item?"
+                                    class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
+                    <!-- </div> -->
+
+                </tr>
+
+
+                {%empty%}
+                <tr><td class="text-center">No Current Items Are Available</td></tr>
+
+            {% endfor %}   
+
+</tbody>
+</table>
+                       
+               
+                    
+                    
+</div>
+</div>
+</div>
