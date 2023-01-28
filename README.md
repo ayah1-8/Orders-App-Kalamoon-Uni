@@ -1,7 +1,6 @@
 # Orders-App-Kalamoon-Uni
 Semester Project that Automates annual needs and purchase needs processes at Kalamoon University.
 
-	These days, people strive to achieve comfort and convenience by resorting to many methods that provide variety of services and accomplish their goals, targets and best of interest. In regards of University Of Kalamoon, it is well known that it is always in pursuit of finding the appropriate means to deliver those services to its employees and students. Hence, the idea of building a web application that provides the service of submitting annual needs request came to mind.
   
  The user, which is the requesting party, is able to apply for a request by filling in the request form for the current year and be able to apply adjustments to this specific request until the user is satisfied with the result. After the request has been confirmed, it will be directed to the vice president of the university.
  
